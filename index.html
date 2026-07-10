@@ -1,11 +1,11 @@
-<html>
-<BLOGFA>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="telegram:bot" content="@Myshop1610_bot">
     <title>🌈 دنیای بازی فندق</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -45,10 +45,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        .master-page::before {
-            display: none;
         }
 
         /* ===== HEADER ===== */
@@ -91,7 +87,6 @@
             box-shadow: 0 0 40px rgba(255, 0, 200, 0.5), 0 0 80px rgba(255, 200, 0, 0.3);
             transition: 0.4s;
             border: 4px solid rgba(255, 255, 255, 0.4);
-            transform: rotate(0deg);
             flex-shrink: 0;
         }
 
@@ -126,7 +121,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: shiftGrad 4s ease-in-out infinite alternate;
-            text-shadow: 0 0 30px rgba(255, 100, 200, 0.3);
             line-height: 1.2;
         }
 
@@ -193,15 +187,16 @@
             margin-top: 2px;
         }
 
-        /* ===== کارت لینک دار (بلاک پازل) ===== */
-        .card-link-block {
+        /* ===== کارت لینک دار ===== */
+        .card-link-block, .card-link, .card-link-sudoku, .card-link-brick {
             text-decoration: none;
             display: block;
             color: inherit;
             width: 100%;
             height: 100%;
         }
-        .card-link-block .card {
+
+        .card-link-block .card, .card-link .card, .card-link-sudoku .card, .card-link-brick .card {
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -209,11 +204,12 @@
             height: 100%;
             min-height: 180px;
         }
-        .card-link-block .card .block-grid {
+
+        .card-link-block .card .block-grid,
+        .card-link .card .dox-grid,
+        .card-link-sudoku .card .sudoku-grid,
+        .card-link-brick .card .brick-grid {
             display: grid;
-            grid-template-columns: repeat(4, 18px);
-            grid-template-rows: repeat(4, 18px);
-            gap: 2px;
             justify-content: center;
             margin: 6px auto 4px;
             padding: 3px;
@@ -221,6 +217,12 @@
             border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.06);
             width: fit-content;
+        }
+
+        .card-link-block .card .block-grid {
+            grid-template-columns: repeat(4, 18px);
+            grid-template-rows: repeat(4, 18px);
+            gap: 2px;
         }
         .card-link-block .card .block-grid .block-cell {
             width: 18px;
@@ -231,49 +233,12 @@
         .card-link-block .card .block-grid .block-cell.filled { background: #4a9eff; }
         .card-link-block .card .block-grid .block-cell.filled2 { background: #ff6b6b; }
         .card-link-block .card .block-grid .block-cell.filled3 { background: #ffd93d; }
-        .card-link-block .card .game-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #a29bfe;
-            margin-top: 4px;
-            text-shadow: 0 0 20px rgba(162, 155, 254, 0.2);
-            letter-spacing: 0.3px;
-        }
-        .card-link-block:hover .card {
-            transform: translateY(-8px) scale(1.02);
-            border-image: linear-gradient(45deg, #a29bfe, #6c5ce7, #4a9eff, #a29bfe) 1;
-            box-shadow: 0 20px 40px rgba(162, 155, 254, 0.4);
-            background: rgba(40, 20, 60, 0.7);
-        }
 
-        /* ===== کارت لینک دار (دوز) ===== */
-        .card-link {
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-        }
-        .card-link .card {
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            padding: 20px 12px;
-            height: 100%;
-            min-height: 180px;
-        }
         .card-link .card .dox-grid {
-            display: grid;
             grid-template-columns: repeat(3, 22px);
             grid-template-rows: repeat(3, 22px);
             gap: 3px;
-            justify-content: center;
-            margin: 6px auto 4px;
             padding: 4px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.06);
-            width: fit-content;
         }
         .card-link .card .dox-grid .dox-cell {
             width: 22px;
@@ -288,49 +253,11 @@
         }
         .card-link .card .dox-grid .dox-cell.x { color: #ff6b6b; }
         .card-link .card .dox-grid .dox-cell.o { color: #4ecdc4; }
-        .card-link .card .game-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ffd93d;
-            margin-top: 4px;
-            text-shadow: 0 0 20px rgba(255, 217, 61, 0.2);
-            letter-spacing: 0.3px;
-        }
-        .card-link:hover .card {
-            transform: translateY(-8px) scale(1.02);
-            border-image: linear-gradient(45deg, #ff44aa, #ffcc00, #66ffcc, #ff44ff) 1;
-            box-shadow: 0 20px 40px rgba(255, 0, 200, 0.4);
-            background: rgba(40, 20, 60, 0.7);
-        }
 
-        /* ===== کارت لینک دار (سودوکو) ===== */
-        .card-link-sudoku {
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-        }
-        .card-link-sudoku .card {
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            padding: 20px 12px;
-            height: 100%;
-            min-height: 180px;
-        }
         .card-link-sudoku .card .sudoku-grid {
-            display: grid;
             grid-template-columns: repeat(3, 18px);
             grid-template-rows: repeat(3, 18px);
             gap: 2px;
-            justify-content: center;
-            margin: 6px auto 4px;
-            padding: 3px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.06);
-            width: fit-content;
         }
         .card-link-sudoku .card .sudoku-grid .sudoku-cell {
             width: 18px;
@@ -356,49 +283,11 @@
             background: rgba(255, 217, 61, 0.3);
             color: #ffd93d;
         }
-        .card-link-sudoku .card .game-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ff9ff3;
-            margin-top: 4px;
-            text-shadow: 0 0 20px rgba(255, 159, 243, 0.2);
-            letter-spacing: 0.3px;
-        }
-        .card-link-sudoku:hover .card {
-            transform: translateY(-8px) scale(1.02);
-            border-image: linear-gradient(45deg, #ff9ff3, #f368e0, #ff6b6b, #ff9ff3) 1;
-            box-shadow: 0 20px 40px rgba(255, 159, 243, 0.4);
-            background: rgba(40, 20, 60, 0.7);
-        }
 
-        /* ===== کارت لینک دار (بریک بریکر) ===== */
-        .card-link-brick {
-            text-decoration: none;
-            display: block;
-            color: inherit;
-            width: 100%;
-            height: 100%;
-        }
-        .card-link-brick .card {
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            padding: 20px 12px;
-            height: 100%;
-            min-height: 180px;
-        }
         .card-link-brick .card .brick-grid {
-            display: grid;
             grid-template-columns: repeat(4, 18px);
             grid-template-rows: repeat(3, 18px);
             gap: 2px;
-            justify-content: center;
-            margin: 6px auto 4px;
-            padding: 3px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.06);
-            width: fit-content;
         }
         .card-link-brick .card .brick-grid .brick-cell {
             width: 18px;
@@ -422,20 +311,18 @@
             width: 100%;
             align-self: flex-end;
         }
-        .card-link-brick .card .game-label {
+
+        .game-label {
             font-size: 0.75rem;
             font-weight: 700;
-            color: #ff6b6b;
             margin-top: 4px;
-            text-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
             letter-spacing: 0.3px;
         }
-        .card-link-brick:hover .card {
-            transform: translateY(-8px) scale(1.02);
-            border-image: linear-gradient(45deg, #ff6b6b, #ffd93d, #4a9eff, #ff6b6b) 1;
-            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
-            background: rgba(40, 20, 60, 0.7);
-        }
+
+        .card-link-block .game-label { color: #a29bfe; text-shadow: 0 0 20px rgba(162, 155, 254, 0.2); }
+        .card-link .game-label { color: #ffd93d; text-shadow: 0 0 20px rgba(255, 217, 61, 0.2); }
+        .card-link-sudoku .game-label { color: #ff9ff3; text-shadow: 0 0 20px rgba(255, 159, 243, 0.2); }
+        .card-link-brick .game-label { color: #ff6b6b; text-shadow: 0 0 20px rgba(255, 107, 107, 0.2); }
 
         /* ===== BUBBLES ===== */
         .float-bubbles {
@@ -505,115 +392,49 @@
             font-size: 1.05rem;
             letter-spacing: 1px;
         }
-        .footer-magic .phone:hover {
-            background: rgba(255, 200, 100, 0.2);
-            border-color: #ffaa44;
-            box-shadow: 0 0 30px rgba(255, 200, 0, 0.1);
+
+        /* ===== دکمه شناور گروه ===== */
+        .floating-group-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s;
+            border: none;
+            font-size: 28px;
+            text-decoration: none;
+        }
+        .floating-group-btn:active {
+            transform: scale(0.95);
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (min-width: 1024px) {
-            body { padding: 20px; }
-            .master-page {
-                max-width: 1100px;
-                min-height: 90vh;
-                max-height: 98vh;
-                padding: 30px 35px 28px;
-                border-radius: 80px 35px 90px 35px;
-            }
-            .card-grid { gap: 24px 20px; margin: 20px 0 15px; }
-            .card { min-height: 220px; padding: 28px 16px; }
-            .card .card-title { font-size: 1.3rem; }
-            .card-link-block .card .block-grid {
-                grid-template-columns: repeat(4, 24px);
-                grid-template-rows: repeat(4, 24px);
-                gap: 3px;
-                padding: 4px;
-            }
-            .card-link-block .card .block-grid .block-cell { width: 24px; height: 24px; }
-            .card-link-block .card .game-label { font-size: 0.9rem; }
-            .card-link .card .dox-grid {
-                grid-template-columns: repeat(3, 28px);
-                grid-template-rows: repeat(3, 28px);
-                gap: 4px;
-                padding: 5px;
-            }
-            .card-link .card .dox-grid .dox-cell { width: 28px; height: 28px; font-size: 18px; }
-            .card-link .card .game-label { font-size: 0.9rem; }
-            .card-link-sudoku .card .sudoku-grid {
-                grid-template-columns: repeat(3, 24px);
-                grid-template-rows: repeat(3, 24px);
-                gap: 3px;
-                padding: 4px;
-            }
-            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 24px; height: 24px; font-size: 14px; }
-            .card-link-sudoku .card .game-label { font-size: 0.9rem; }
-            .card-link-brick .card .brick-grid {
-                grid-template-columns: repeat(4, 24px);
-                grid-template-rows: repeat(3, 24px);
-                gap: 3px;
-                padding: 4px;
-            }
-            .card-link-brick .card .brick-grid .brick-cell { width: 24px; height: 24px; }
-            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 6px; }
-            .card-link-brick .card .game-label { font-size: 0.9rem; }
-            .header-rainbow { padding: 20px 30px; gap: 20px 35px; }
-            .logo-circle { width: 95px; height: 95px; min-width: 80px; min-height: 80px; font-size: 3.2rem; }
-            .header-text h1 { font-size: 3.4rem; }
-            .float-bubbles { gap: 25px 40px; margin: 12px 0; }
-            .bubble { font-size: 3rem; }
-            .footer-magic { margin-top: 18px; padding-top: 20px; }
-            .footer-magic .designer { font-size: 1.3rem; }
-            .footer-magic .phone { font-size: 1.1rem; padding: 6px 22px; }
-        }
-
         @media (max-width: 650px) {
             .master-page { padding: 16px 14px 20px; border-radius: 50px 20px 50px 20px; min-height: 80vh; }
-            .header-rainbow { flex-direction: column; align-items: center; gap: 10px; padding: 16px 12px; border-radius: 80px 25px 80px 25px; }
-            .logo-circle { width: 70px; height: 70px; min-width: 60px; min-height: 60px; font-size: 2.2rem; }
+            .header-rainbow { flex-direction: column; align-items: center; gap: 10px; padding: 16px 12px; }
+            .logo-circle { width: 70px; height: 70px; font-size: 2.2rem; }
             .header-text h1 { font-size: 1.9rem; letter-spacing: 2px; }
-            .card-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 12px 0; }
+            .card-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
             .card { min-height: 160px; padding: 16px 10px; }
             .card .card-title { font-size: 1rem; }
-            .card-link-block .card .block-grid { grid-template-columns: repeat(4, 16px); grid-template-rows: repeat(4, 16px); gap: 2px; padding: 2px; }
-            .card-link-block .card .block-grid .block-cell { width: 16px; height: 16px; }
-            .card-link-block .card .game-label { font-size: 0.7rem; }
-            .card-link .card .dox-grid { grid-template-columns: repeat(3, 20px); grid-template-rows: repeat(3, 20px); gap: 2px; padding: 3px; }
-            .card-link .card .dox-grid .dox-cell { width: 20px; height: 20px; font-size: 13px; }
-            .card-link .card .game-label { font-size: 0.7rem; }
-            .card-link-sudoku .card .sudoku-grid { grid-template-columns: repeat(3, 16px); grid-template-rows: repeat(3, 16px); gap: 2px; padding: 2px; }
-            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 16px; height: 16px; font-size: 10px; }
-            .card-link-sudoku .card .game-label { font-size: 0.7rem; }
-            .card-link-brick .card .brick-grid { grid-template-columns: repeat(4, 16px); grid-template-rows: repeat(3, 16px); gap: 2px; padding: 2px; }
-            .card-link-brick .card .brick-grid .brick-cell { width: 16px; height: 16px; }
-            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 4px; }
-            .card-link-brick .card .game-label { font-size: 0.7rem; }
             .bubble { font-size: 2rem; }
-            .footer-magic .designer { font-size: 1rem; }
-            .footer-magic .phone { font-size: 0.9rem; padding: 2px 14px; }
         }
 
         @media (max-width: 430px) {
-            .logo-circle { width: 60px; height: 60px; min-width: 50px; min-height: 50px; font-size: 1.8rem; }
+            .logo-circle { width: 60px; height: 60px; font-size: 1.8rem; }
             .header-text h1 { font-size: 1.6rem; }
             .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .card { padding: 12px 6px; min-height: 140px; }
             .card .card-title { font-size: 0.9rem; }
-            .card-link-block .card .block-grid { grid-template-columns: repeat(4, 14px); grid-template-rows: repeat(4, 14px); gap: 1.5px; padding: 2px; }
-            .card-link-block .card .block-grid .block-cell { width: 14px; height: 14px; }
-            .card-link-block .card .game-label { font-size: 0.65rem; }
-            .card-link .card .dox-grid { grid-template-columns: repeat(3, 18px); grid-template-rows: repeat(3, 18px); gap: 2px; padding: 2px; }
-            .card-link .card .dox-grid .dox-cell { width: 18px; height: 18px; font-size: 11px; }
-            .card-link .card .game-label { font-size: 0.65rem; }
-            .card-link-sudoku .card .sudoku-grid { grid-template-columns: repeat(3, 14px); grid-template-rows: repeat(3, 14px); gap: 1.5px; padding: 2px; }
-            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 14px; height: 14px; font-size: 9px; }
-            .card-link-sudoku .card .game-label { font-size: 0.65rem; }
-            .card-link-brick .card .brick-grid { grid-template-columns: repeat(4, 14px); grid-template-rows: repeat(3, 14px); gap: 1.5px; padding: 2px; }
-            .card-link-brick .card .brick-grid .brick-cell { width: 14px; height: 14px; }
-            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 3px; }
-            .card-link-brick .card .game-label { font-size: 0.65rem; }
-            .footer-magic .designer { font-size: 0.95rem; }
-            .footer-magic .phone { font-size: 0.85rem; padding: 2px 10px; }
         }
     </style>
 </head>
@@ -632,7 +453,7 @@
     <!-- ===== CARD GRID ===== -->
     <div class="card-grid" id="cardGrid">
         <!-- کارت 1: بلاک پازل -->
-        <a href="http://bazarebazi.blogfa.com/page/blockbuzzl" target="_blank" class="card-link-block">
+        <a href="https://bazarebazi.blogfa.com/page/blockbuzzl" target="_blank" class="card-link-block">
             <div class="card">
                 <div class="card-title" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بازی بلاک پازل</div>
                 <div class="block-grid">
@@ -658,7 +479,7 @@
         </a>
 
         <!-- کارت 2: دوز -->
-        <a href="http://bazarebazi.blogfa.com/page/dooz" target="_blank" class="card-link">
+        <a href="https://bazarebazi.blogfa.com/page/dooz" target="_blank" class="card-link">
             <div class="card">
                 <div class="card-title" style="background:linear-gradient(135deg,#ffd93d,#ff6b6b,#4ecdc4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بازی دوز</div>
                 <div class="dox-grid">
@@ -677,7 +498,7 @@
         </a>
 
         <!-- کارت 3: سودوکو -->
-        <a href="http://bazarebazi.blogfa.com/page/sodoko" target="_blank" class="card-link-sudoku">
+        <a href="https://bazarebazi.blogfa.com/page/sodoko" target="_blank" class="card-link-sudoku">
             <div class="card">
                 <div class="card-title" style="background:linear-gradient(135deg,#ff9ff3,#f368e0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">سودوکو</div>
                 <div class="sudoku-grid">
@@ -696,7 +517,7 @@
         </a>
 
         <!-- کارت 4: بریک بریکر -->
-        <a href="http://bazarebazi.blogfa.com/page/brickbreaker" target="_blank" class="card-link-brick">
+        <a href="https://bazarebazi.blogfa.com/page/brickbreaker" target="_blank" class="card-link-brick">
             <div class="card">
                 <div class="card-title" style="background:linear-gradient(135deg,#ff6b6b,#ffd93d,#4a9eff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بریک بریکر</div>
                 <div class="brick-grid">
@@ -751,9 +572,21 @@
 
 </div>
 
+<!-- دکمه شناور برای ورود به گروه -->
+<a href="https://t.me/YourGroupLink" class="floating-group-btn" title="ورود به گروه">
+    👥
+</a>
+
 <script>
+// اتصال به تلگرام
+let tg = window.Telegram.WebApp;
+tg.expand(); // تمام صفحه کردن
+
+// تغییر رنگ‌ها بر اساس تم تلگرام
+document.documentElement.style.setProperty('--tg-theme-bg-color', tg.backgroundColor || '#0b0a1a');
+
 (function() {
-    // ===== کارت‌های "به زودی" =====
+    // کارت‌های "به زودی"
     var cards = document.querySelectorAll('.card:not(.card-link .card):not(.card-link-block .card):not(.card-link-sudoku .card):not(.card-link-brick .card)');
     for (var j = 0; j < cards.length; j++) {
         (function(card) {
@@ -769,7 +602,7 @@
         })(cards[j]);
     }
 
-    // ===== لوگو =====
+    // لوگو
     var logo = document.querySelector('.logo-circle');
     logo.addEventListener('dblclick', function() {
         this.style.animation = 'none';
@@ -781,7 +614,6 @@
             this.style.boxShadow = '0 0 40px rgba(255, 0, 200, 0.5), 0 0 80px rgba(255, 200, 0, 0.3)';
         }.bind(this), 400);
     });
-
 })();
 </script>
 
