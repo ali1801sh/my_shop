@@ -1,0 +1,789 @@
+<html>
+<BLOGFA>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🌈 دنیای بازی فندق</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: #0b0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Vazir', Tahoma, Arial, sans-serif;
+            padding: 12px;
+            direction: rtl;
+        }
+
+        .master-page {
+            max-width: 1100px;
+            width: 100%;
+            min-height: 85vh;
+            background: rgba(10, 8, 25, 0.55);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 70px 30px 80px 30px;
+            padding: 28px 28px 32px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 
+                        0 0 0 4px rgba(255, 180, 50, 0.3),
+                        inset 0 0 100px rgba(255, 100, 200, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .master-page::before {
+            display: none;
+        }
+
+        /* ===== HEADER ===== */
+        .header-rainbow {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px 25px;
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 120px 40px 120px 40px;
+            border: 1.5px solid rgba(255, 215, 100, 0.25);
+            box-shadow: 0 8px 32px rgba(255, 0, 150, 0.15);
+            flex-shrink: 0;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            min-width: 70px;
+            min-height: 70px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ff0066, #ff8800, #ffdd00, #44ff88, #00ccff, #aa44ff, #ff0066);
+            background-size: 200% 200%;
+            animation: pulseLogo 5s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 30px #ff44aa, 0 0 60px #ffaa00, 0 0 100px #00ddff;
+            box-shadow: 0 0 40px rgba(255, 0, 200, 0.5), 0 0 80px rgba(255, 200, 0, 0.3);
+            transition: 0.4s;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            transform: rotate(0deg);
+            flex-shrink: 0;
+        }
+
+        @keyframes pulseLogo {
+            0% { background-position: 0% 50%; transform: scale(1) rotate(0deg); }
+            50% { background-position: 100% 50%; transform: scale(1.06) rotate(6deg); }
+            100% { background-position: 0% 50%; transform: scale(1) rotate(-3deg); }
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1) rotate(20deg);
+            box-shadow: 0 0 80px #ff44ff, 0 0 150px #ffaa00;
+            border-color: #ffffff;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-text h1 {
+            font-size: clamp(2rem, 5.5vw, 3.8rem);
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #ff99cc, #ffcc00, #66ffcc, #ff44aa);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shiftGrad 4s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(255, 100, 200, 0.3);
+            line-height: 1.2;
+        }
+
+        @keyframes shiftGrad {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* ===== CARD GRID ===== */
+        .card-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px 16px;
+            margin: 15px 0 10px;
+            flex: 1 1 auto;
+            align-content: center;
+        }
+
+        .card {
+            background: rgba(25, 15, 40, 0.5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 50px 18px 50px 18px;
+            padding: 20px 12px;
+            text-align: center;
+            border: 3px solid transparent;
+            border-image: linear-gradient(135deg, #ff0066, #ffaa00, #00ddff, #aa44ff) 1;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: all 0.25s ease;
+            color: #fff;
+            font-weight: bold;
+            transform: scale(1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-image: linear-gradient(45deg, #ff44aa, #ffcc00, #66ffcc, #ff44ff) 1;
+            box-shadow: 0 20px 40px rgba(255, 0, 200, 0.4);
+            background: rgba(40, 20, 60, 0.7);
+        }
+
+        .card .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffdd99, #ffaa66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 4px 0;
+        }
+
+        .card .card-sub {
+            font-size: 0.75rem;
+            color: #ffe9c7;
+            opacity: 0.5;
+            margin-top: 2px;
+        }
+
+        /* ===== کارت لینک دار (بلاک پازل) ===== */
+        .card-link-block {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+        }
+        .card-link-block .card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 12px;
+            height: 100%;
+            min-height: 180px;
+        }
+        .card-link-block .card .block-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 18px);
+            grid-template-rows: repeat(4, 18px);
+            gap: 2px;
+            justify-content: center;
+            margin: 6px auto 4px;
+            padding: 3px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            width: fit-content;
+        }
+        .card-link-block .card .block-grid .block-cell {
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.04);
+        }
+        .card-link-block .card .block-grid .block-cell.filled { background: #4a9eff; }
+        .card-link-block .card .block-grid .block-cell.filled2 { background: #ff6b6b; }
+        .card-link-block .card .block-grid .block-cell.filled3 { background: #ffd93d; }
+        .card-link-block .card .game-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #a29bfe;
+            margin-top: 4px;
+            text-shadow: 0 0 20px rgba(162, 155, 254, 0.2);
+            letter-spacing: 0.3px;
+        }
+        .card-link-block:hover .card {
+            transform: translateY(-8px) scale(1.02);
+            border-image: linear-gradient(45deg, #a29bfe, #6c5ce7, #4a9eff, #a29bfe) 1;
+            box-shadow: 0 20px 40px rgba(162, 155, 254, 0.4);
+            background: rgba(40, 20, 60, 0.7);
+        }
+
+        /* ===== کارت لینک دار (دوز) ===== */
+        .card-link {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+        }
+        .card-link .card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 12px;
+            height: 100%;
+            min-height: 180px;
+        }
+        .card-link .card .dox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 22px);
+            grid-template-rows: repeat(3, 22px);
+            gap: 3px;
+            justify-content: center;
+            margin: 6px auto 4px;
+            padding: 4px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            width: fit-content;
+        }
+        .card-link .card .dox-grid .dox-cell {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.04);
+        }
+        .card-link .card .dox-grid .dox-cell.x { color: #ff6b6b; }
+        .card-link .card .dox-grid .dox-cell.o { color: #4ecdc4; }
+        .card-link .card .game-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffd93d;
+            margin-top: 4px;
+            text-shadow: 0 0 20px rgba(255, 217, 61, 0.2);
+            letter-spacing: 0.3px;
+        }
+        .card-link:hover .card {
+            transform: translateY(-8px) scale(1.02);
+            border-image: linear-gradient(45deg, #ff44aa, #ffcc00, #66ffcc, #ff44ff) 1;
+            box-shadow: 0 20px 40px rgba(255, 0, 200, 0.4);
+            background: rgba(40, 20, 60, 0.7);
+        }
+
+        /* ===== کارت لینک دار (سودوکو) ===== */
+        .card-link-sudoku {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+        }
+        .card-link-sudoku .card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 12px;
+            height: 100%;
+            min-height: 180px;
+        }
+        .card-link-sudoku .card .sudoku-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 18px);
+            grid-template-rows: repeat(3, 18px);
+            gap: 2px;
+            justify-content: center;
+            margin: 6px auto 4px;
+            padding: 3px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            width: fit-content;
+        }
+        .card-link-sudoku .card .sudoku-grid .sudoku-cell {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.04);
+            color: #ffe9c7;
+        }
+        .card-link-sudoku .card .sudoku-grid .sudoku-cell.filled { 
+            background: rgba(74, 158, 255, 0.3);
+            color: #4a9eff;
+        }
+        .card-link-sudoku .card .sudoku-grid .sudoku-cell.filled2 { 
+            background: rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+        .card-link-sudoku .card .sudoku-grid .sudoku-cell.filled3 { 
+            background: rgba(255, 217, 61, 0.3);
+            color: #ffd93d;
+        }
+        .card-link-sudoku .card .game-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ff9ff3;
+            margin-top: 4px;
+            text-shadow: 0 0 20px rgba(255, 159, 243, 0.2);
+            letter-spacing: 0.3px;
+        }
+        .card-link-sudoku:hover .card {
+            transform: translateY(-8px) scale(1.02);
+            border-image: linear-gradient(45deg, #ff9ff3, #f368e0, #ff6b6b, #ff9ff3) 1;
+            box-shadow: 0 20px 40px rgba(255, 159, 243, 0.4);
+            background: rgba(40, 20, 60, 0.7);
+        }
+
+        /* ===== کارت لینک دار (بریک بریکر) ===== */
+        .card-link-brick {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+            width: 100%;
+            height: 100%;
+        }
+        .card-link-brick .card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 12px;
+            height: 100%;
+            min-height: 180px;
+        }
+        .card-link-brick .card .brick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 18px);
+            grid-template-rows: repeat(3, 18px);
+            gap: 2px;
+            justify-content: center;
+            margin: 6px auto 4px;
+            padding: 3px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            width: fit-content;
+        }
+        .card-link-brick .card .brick-grid .brick-cell {
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.04);
+        }
+        .card-link-brick .card .brick-grid .brick-cell.brick1 { background: #ff6b6b; }
+        .card-link-brick .card .brick-grid .brick-cell.brick2 { background: #ffd93d; }
+        .card-link-brick .card .brick-grid .brick-cell.brick3 { background: #4a9eff; }
+        .card-link-brick .card .brick-grid .brick-cell.brick4 { background: #a29bfe; }
+        .card-link-brick .card .brick-grid .brick-cell.ball {
+            background: radial-gradient(circle, #ffffff, #ffd93d);
+            border-radius: 50%;
+            box-shadow: 0 0 6px #ffd93d;
+        }
+        .card-link-brick .card .brick-grid .brick-cell.paddle {
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            border-radius: 4px;
+            height: 4px;
+            width: 100%;
+            align-self: flex-end;
+        }
+        .card-link-brick .card .game-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-top: 4px;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+            letter-spacing: 0.3px;
+        }
+        .card-link-brick:hover .card {
+            transform: translateY(-8px) scale(1.02);
+            border-image: linear-gradient(45deg, #ff6b6b, #ffd93d, #4a9eff, #ff6b6b) 1;
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+            background: rgba(40, 20, 60, 0.7);
+        }
+
+        /* ===== BUBBLES ===== */
+        .float-bubbles {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            margin: 15px 0 8px;
+            flex-shrink: 0;
+        }
+        .bubble {
+            font-size: 2.6rem;
+            animation: bob 6s infinite alternate ease-in-out;
+            filter: drop-shadow(0 0 25px #ff44aa);
+            transition: 0.3s;
+            cursor: default;
+            display: inline-block;
+        }
+        .bubble:nth-child(2) { animation-delay: 1.2s; filter: drop-shadow(0 0 25px #ffaa00); }
+        .bubble:nth-child(3) { animation-delay: 2.5s; filter: drop-shadow(0 0 25px #00ddff); }
+        .bubble:nth-child(4) { animation-delay: 3.8s; filter: drop-shadow(0 0 25px #ff0066); }
+        .bubble:nth-child(5) { animation-delay: 5s; filter: drop-shadow(0 0 25px #aa88ff); }
+        @keyframes bob {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            100% { transform: translateY(-22px) rotate(12deg) scale(1.15); }
+        }
+        .bubble:hover {
+            transform: scale(1.6) rotate(30deg);
+            filter: drop-shadow(0 0 60px #ffcc00);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-magic {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 12px;
+            padding-top: 16px;
+            border-top: 2px dashed rgba(255, 200, 100, 0.25);
+            color: rgba(255, 235, 200, 0.85);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            flex-shrink: 0;
+        }
+        .footer-magic .designer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ffaa88, #ffdd99);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+        .footer-magic .phone {
+            direction: ltr;
+            display: inline-block;
+            background: rgba(255, 215, 100, 0.1);
+            padding: 4px 18px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 200, 100, 0.2);
+            font-weight: 500;
+            color: #ffeac2;
+            margin-top: 4px;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+        .footer-magic .phone:hover {
+            background: rgba(255, 200, 100, 0.2);
+            border-color: #ffaa44;
+            box-shadow: 0 0 30px rgba(255, 200, 0, 0.1);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 1024px) {
+            body { padding: 20px; }
+            .master-page {
+                max-width: 1100px;
+                min-height: 90vh;
+                max-height: 98vh;
+                padding: 30px 35px 28px;
+                border-radius: 80px 35px 90px 35px;
+            }
+            .card-grid { gap: 24px 20px; margin: 20px 0 15px; }
+            .card { min-height: 220px; padding: 28px 16px; }
+            .card .card-title { font-size: 1.3rem; }
+            .card-link-block .card .block-grid {
+                grid-template-columns: repeat(4, 24px);
+                grid-template-rows: repeat(4, 24px);
+                gap: 3px;
+                padding: 4px;
+            }
+            .card-link-block .card .block-grid .block-cell { width: 24px; height: 24px; }
+            .card-link-block .card .game-label { font-size: 0.9rem; }
+            .card-link .card .dox-grid {
+                grid-template-columns: repeat(3, 28px);
+                grid-template-rows: repeat(3, 28px);
+                gap: 4px;
+                padding: 5px;
+            }
+            .card-link .card .dox-grid .dox-cell { width: 28px; height: 28px; font-size: 18px; }
+            .card-link .card .game-label { font-size: 0.9rem; }
+            .card-link-sudoku .card .sudoku-grid {
+                grid-template-columns: repeat(3, 24px);
+                grid-template-rows: repeat(3, 24px);
+                gap: 3px;
+                padding: 4px;
+            }
+            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 24px; height: 24px; font-size: 14px; }
+            .card-link-sudoku .card .game-label { font-size: 0.9rem; }
+            .card-link-brick .card .brick-grid {
+                grid-template-columns: repeat(4, 24px);
+                grid-template-rows: repeat(3, 24px);
+                gap: 3px;
+                padding: 4px;
+            }
+            .card-link-brick .card .brick-grid .brick-cell { width: 24px; height: 24px; }
+            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 6px; }
+            .card-link-brick .card .game-label { font-size: 0.9rem; }
+            .header-rainbow { padding: 20px 30px; gap: 20px 35px; }
+            .logo-circle { width: 95px; height: 95px; min-width: 80px; min-height: 80px; font-size: 3.2rem; }
+            .header-text h1 { font-size: 3.4rem; }
+            .float-bubbles { gap: 25px 40px; margin: 12px 0; }
+            .bubble { font-size: 3rem; }
+            .footer-magic { margin-top: 18px; padding-top: 20px; }
+            .footer-magic .designer { font-size: 1.3rem; }
+            .footer-magic .phone { font-size: 1.1rem; padding: 6px 22px; }
+        }
+
+        @media (max-width: 650px) {
+            .master-page { padding: 16px 14px 20px; border-radius: 50px 20px 50px 20px; min-height: 80vh; }
+            .header-rainbow { flex-direction: column; align-items: center; gap: 10px; padding: 16px 12px; border-radius: 80px 25px 80px 25px; }
+            .logo-circle { width: 70px; height: 70px; min-width: 60px; min-height: 60px; font-size: 2.2rem; }
+            .header-text h1 { font-size: 1.9rem; letter-spacing: 2px; }
+            .card-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin: 12px 0; }
+            .card { min-height: 160px; padding: 16px 10px; }
+            .card .card-title { font-size: 1rem; }
+            .card-link-block .card .block-grid { grid-template-columns: repeat(4, 16px); grid-template-rows: repeat(4, 16px); gap: 2px; padding: 2px; }
+            .card-link-block .card .block-grid .block-cell { width: 16px; height: 16px; }
+            .card-link-block .card .game-label { font-size: 0.7rem; }
+            .card-link .card .dox-grid { grid-template-columns: repeat(3, 20px); grid-template-rows: repeat(3, 20px); gap: 2px; padding: 3px; }
+            .card-link .card .dox-grid .dox-cell { width: 20px; height: 20px; font-size: 13px; }
+            .card-link .card .game-label { font-size: 0.7rem; }
+            .card-link-sudoku .card .sudoku-grid { grid-template-columns: repeat(3, 16px); grid-template-rows: repeat(3, 16px); gap: 2px; padding: 2px; }
+            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 16px; height: 16px; font-size: 10px; }
+            .card-link-sudoku .card .game-label { font-size: 0.7rem; }
+            .card-link-brick .card .brick-grid { grid-template-columns: repeat(4, 16px); grid-template-rows: repeat(3, 16px); gap: 2px; padding: 2px; }
+            .card-link-brick .card .brick-grid .brick-cell { width: 16px; height: 16px; }
+            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 4px; }
+            .card-link-brick .card .game-label { font-size: 0.7rem; }
+            .bubble { font-size: 2rem; }
+            .footer-magic .designer { font-size: 1rem; }
+            .footer-magic .phone { font-size: 0.9rem; padding: 2px 14px; }
+        }
+
+        @media (max-width: 430px) {
+            .logo-circle { width: 60px; height: 60px; min-width: 50px; min-height: 50px; font-size: 1.8rem; }
+            .header-text h1 { font-size: 1.6rem; }
+            .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card { padding: 12px 6px; min-height: 140px; }
+            .card .card-title { font-size: 0.9rem; }
+            .card-link-block .card .block-grid { grid-template-columns: repeat(4, 14px); grid-template-rows: repeat(4, 14px); gap: 1.5px; padding: 2px; }
+            .card-link-block .card .block-grid .block-cell { width: 14px; height: 14px; }
+            .card-link-block .card .game-label { font-size: 0.65rem; }
+            .card-link .card .dox-grid { grid-template-columns: repeat(3, 18px); grid-template-rows: repeat(3, 18px); gap: 2px; padding: 2px; }
+            .card-link .card .dox-grid .dox-cell { width: 18px; height: 18px; font-size: 11px; }
+            .card-link .card .game-label { font-size: 0.65rem; }
+            .card-link-sudoku .card .sudoku-grid { grid-template-columns: repeat(3, 14px); grid-template-rows: repeat(3, 14px); gap: 1.5px; padding: 2px; }
+            .card-link-sudoku .card .sudoku-grid .sudoku-cell { width: 14px; height: 14px; font-size: 9px; }
+            .card-link-sudoku .card .game-label { font-size: 0.65rem; }
+            .card-link-brick .card .brick-grid { grid-template-columns: repeat(4, 14px); grid-template-rows: repeat(3, 14px); gap: 1.5px; padding: 2px; }
+            .card-link-brick .card .brick-grid .brick-cell { width: 14px; height: 14px; }
+            .card-link-brick .card .brick-grid .brick-cell.paddle { height: 3px; }
+            .card-link-brick .card .game-label { font-size: 0.65rem; }
+            .footer-magic .designer { font-size: 0.95rem; }
+            .footer-magic .phone { font-size: 0.85rem; padding: 2px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="master-page" id="gameContainer">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header-rainbow">
+        <div class="logo-circle" aria-label="لوگوی گرد رنگین‌کمان">🎲</div>
+        <div class="header-text">
+            <h1>به دنیای بازی خوش اومدی</h1>
+        </div>
+    </div>
+
+    <!-- ===== CARD GRID ===== -->
+    <div class="card-grid" id="cardGrid">
+        <!-- کارت 1: بلاک پازل -->
+        <a href="http://bazarebazi.blogfa.com/page/blockbuzzl" target="_blank" class="card-link-block">
+            <div class="card">
+                <div class="card-title" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بازی بلاک پازل</div>
+                <div class="block-grid">
+                    <span class="block-cell filled"></span>
+                    <span class="block-cell filled2"></span>
+                    <span class="block-cell filled3"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell filled3"></span>
+                    <span class="block-cell filled"></span>
+                    <span class="block-cell filled2"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell filled2"></span>
+                    <span class="block-cell filled3"></span>
+                    <span class="block-cell filled"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell"></span>
+                    <span class="block-cell"></span>
+                </div>
+                <div class="game-label">🧩 بلاک پازل آنلاین بازی کن !</div>
+            </div>
+        </a>
+
+        <!-- کارت 2: دوز -->
+        <a href="http://bazarebazi.blogfa.com/page/dooz" target="_blank" class="card-link">
+            <div class="card">
+                <div class="card-title" style="background:linear-gradient(135deg,#ffd93d,#ff6b6b,#4ecdc4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بازی دوز</div>
+                <div class="dox-grid">
+                    <span class="dox-cell x">✕</span>
+                    <span class="dox-cell o">◯</span>
+                    <span class="dox-cell x">✕</span>
+                    <span class="dox-cell o">◯</span>
+                    <span class="dox-cell x">✕</span>
+                    <span class="dox-cell o">◯</span>
+                    <span class="dox-cell x">✕</span>
+                    <span class="dox-cell o">◯</span>
+                    <span class="dox-cell x">✕</span>
+                </div>
+                <div class="game-label">🎯 دوز آنلاین بازی کن !</div>
+            </div>
+        </a>
+
+        <!-- کارت 3: سودوکو -->
+        <a href="http://bazarebazi.blogfa.com/page/sodoko" target="_blank" class="card-link-sudoku">
+            <div class="card">
+                <div class="card-title" style="background:linear-gradient(135deg,#ff9ff3,#f368e0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">سودوکو</div>
+                <div class="sudoku-grid">
+                    <span class="sudoku-cell filled">5</span>
+                    <span class="sudoku-cell filled2">3</span>
+                    <span class="sudoku-cell"> </span>
+                    <span class="sudoku-cell filled3">6</span>
+                    <span class="sudoku-cell"> </span>
+                    <span class="sudoku-cell filled">7</span>
+                    <span class="sudoku-cell"> </span>
+                    <span class="sudoku-cell filled2">9</span>
+                    <span class="sudoku-cell filled3">8</span>
+                </div>
+                <div class="game-label">🧩 سودوکو آنلاین بازی کن !</div>
+            </div>
+        </a>
+
+        <!-- کارت 4: بریک بریکر -->
+        <a href="http://bazarebazi.blogfa.com/page/brickbreaker" target="_blank" class="card-link-brick">
+            <div class="card">
+                <div class="card-title" style="background:linear-gradient(135deg,#ff6b6b,#ffd93d,#4a9eff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">بریک بریکر</div>
+                <div class="brick-grid">
+                    <span class="brick-cell brick1"></span>
+                    <span class="brick-cell brick2"></span>
+                    <span class="brick-cell brick3"></span>
+                    <span class="brick-cell brick4"></span>
+                    <span class="brick-cell brick4"></span>
+                    <span class="brick-cell brick3"></span>
+                    <span class="brick-cell brick2"></span>
+                    <span class="brick-cell brick1"></span>
+                    <span class="brick-cell brick1"></span>
+                    <span class="brick-cell brick4"></span>
+                    <span class="brick-cell brick3"></span>
+                    <span class="brick-cell brick2"></span>
+                    <span class="brick-cell ball"></span>
+                    <span class="brick-cell"></span>
+                    <span class="brick-cell"></span>
+                    <span class="brick-cell paddle" style="grid-column: 2 / 4; height: 4px; align-self: flex-end;"></span>
+                </div>
+                <div class="game-label">🧱 بریک بریکر آنلاین بازی کن !</div>
+            </div>
+        </a>
+
+        <!-- کارت 5 -->
+        <div class="card">
+            <div class="card-title">✨ به زودی</div>
+            <div class="card-sub">بزودی اضافه میشود</div>
+        </div>
+
+        <!-- کارت 6 -->
+        <div class="card">
+            <div class="card-title">✨ به زودی</div>
+            <div class="card-sub">بزودی اضافه میشود</div>
+        </div>
+    </div>
+
+    <!-- ===== BUBBLES ===== -->
+    <div class="float-bubbles">
+        <span class="bubble">💎</span>
+        <span class="bubble">🍭</span>
+        <span class="bubble">🦄</span>
+        <span class="bubble">🌠</span>
+        <span class="bubble">🎈</span>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer-magic">
+        <div class="designer">✨ طراحی و ساخت توسط : علی آسمانی ✨</div>
+        <div class="phone">📞 سفارش ساخت و طراحی سایت شما : ۰۹۲۱۵۲۰۲۱۰۲</div>
+    </div>
+
+</div>
+
+<script>
+(function() {
+    // ===== کارت‌های "به زودی" =====
+    var cards = document.querySelectorAll('.card:not(.card-link .card):not(.card-link-block .card):not(.card-link-sudoku .card):not(.card-link-brick .card)');
+    for (var j = 0; j < cards.length; j++) {
+        (function(card) {
+            card.addEventListener('click', function(e) {
+                var hue = Math.floor(Math.random() * 360);
+                this.style.borderColor = 'hsl(' + hue + ', 90%, 60%)';
+                this.style.boxShadow = '0 0 40px hsl(' + hue + ', 80%, 60%)';
+                this.style.transform = 'scale(0.96) rotate(3deg)';
+                setTimeout(function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }.bind(this), 180);
+            });
+        })(cards[j]);
+    }
+
+    // ===== لوگو =====
+    var logo = document.querySelector('.logo-circle');
+    logo.addEventListener('dblclick', function() {
+        this.style.animation = 'none';
+        this.style.transform = 'scale(1.3) rotate(360deg)';
+        this.style.boxShadow = '0 0 120px #ff44ff, 0 0 200px #ffaa00';
+        setTimeout(function() {
+            this.style.animation = 'pulseLogo 5s ease-in-out infinite alternate';
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.boxShadow = '0 0 40px rgba(255, 0, 200, 0.5), 0 0 80px rgba(255, 200, 0, 0.3)';
+        }.bind(this), 400);
+    });
+
+})();
+</script>
+
+</body>
+</html>
